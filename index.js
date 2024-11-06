@@ -5,7 +5,13 @@ import https from "https";
 // Setup proxy server
 const app = express();
 const port = 5050; // Set to 5050
-const targetUrl = process.argv[2] || "https://performance.nymets.com";
+
+const targetUrl = process.argv[2];
+if (!targetUrl) {
+  throw new Error(
+    "Error: No target URL provided. Please provide a target URL as the second argument, e.g., `npm start https://example.com`"
+  );
+}
 
 // Create an HTTPS agent to manage HTTPS requests
 const httpsAgent = new https.Agent({
